@@ -1,0 +1,44 @@
+.landing__main {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  background-image: url("../../assets/search.svg");
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.landing__title {
+  font-size: 95px;
+}
+
+.landing__subtitle {
+  font-size: 25px;
+  padding-top: 10px;
+}
+
+.landing__intro {
+  width: 100%;
+  text-align: center;
+}
+
+.landing__buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.landing--button {
+  width: 200px;
+  height: 55px;
+}
+
+@media only screen and (max-width: 768px) {
+  .landing__main {
+    height: 50vh;
+  }
+
+  .landing__title {
+    font-size: 50px;
+  }
+}
