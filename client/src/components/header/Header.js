@@ -7,16 +7,19 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">Search Inn</Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/">Search Inn</Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto">
-            <Form inline>
+            <Form inline="true">
               <FormControl
                 type="text"
                 placeholder="Search"
@@ -25,8 +28,10 @@ const Header = () => {
             </Form>
           </Nav>
           <Nav>
-            <Nav.Link href="#home">My job applications</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <Nav.Link>
+              <Link to="/jobs">My job applications</Link>
+            </Nav.Link>
+            <NavDropdown title="" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
             </NavDropdown>

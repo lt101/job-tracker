@@ -1,16 +1,28 @@
+import React from "react";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import "./App.css";
-import Footer from "./components/footer/Footer";
-import Header from "./components/header/Header";
 import LandingPage from "./pages/landingPage/LandingPage";
+import Root from "./Root";
+import Jobs from "./pages/jobs/Jobs";
 
 const App = () => {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Root />}>
+        <Route index element={<LandingPage />} />
+        <Route path="jobs" element={<Jobs />} />
+      </Route>
+    )
+  );
+
   return (
     <>
-      <Header />
-      <main>
-        <LandingPage />
-      </main>
-      <Footer />
+      <RouterProvider router={router} />
     </>
   );
 };
