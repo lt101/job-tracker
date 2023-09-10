@@ -1,15 +1,25 @@
-import React from "react";
-import "./Jobs.css";
-import MainScreen from "../../components/mainScreen/MainScreen";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge, Button, Card } from "react-bootstrap";
-import { jobs } from "../..//data/jobs";
+import axios from "axios";
+import "./Jobs.css";
+import MainScreen from "../../components/mainScreen/MainScreen";
 
 const Jobs = () => {
+  const [jobs, setJobs] = useState([]);
   const handleDelete = (id) => {
     if (window.confirm("Are you sure?")) {
     }
   };
+
+  const fetchJobs = async () => {
+    const { data } = await axios.get("/api/jobs");
+    setJobs(data);
+  };
+
+  useEffect(() => {
+    fetchJobs();
+  }, []);
 
   return (
     <MainScreen title="Welcome back...">
