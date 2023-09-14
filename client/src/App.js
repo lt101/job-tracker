@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./pages/landingPage/LandingPage";
+import LoginPage from "./pages/loginPage/LoginPage";
+import RegisterPage from "./pages/registerPage/RegisterPage";
 import Root from "./Root";
 import Jobs from "./pages/jobs/Jobs";
 
@@ -15,6 +17,8 @@ const App = () => {
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
         <Route index element={<LandingPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
         <Route path="jobs" element={<Jobs />} />
       </Route>
     )
