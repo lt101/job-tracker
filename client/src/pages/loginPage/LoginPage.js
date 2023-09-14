@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import MainScreen from "../../components/mainScreen/MainScreen";
 import Loading from "../../components/Loading";
@@ -18,13 +18,11 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      console.log("try");
       const config = {
         headers: {
           "Content-type": "application/json",
         },
       };
-      console.log(config);
       setLoading(true);
       const { data } = await axios.post(
         "/api/users/login",
@@ -34,7 +32,6 @@ const LoginPage = () => {
         },
         config
       );
-      console.log(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
     } catch (error) {
