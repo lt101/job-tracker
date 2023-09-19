@@ -10,7 +10,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">

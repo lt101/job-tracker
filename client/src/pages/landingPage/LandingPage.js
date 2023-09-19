@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./LandingPage.css";
 
 const LandingPage = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userInfo = localStorage.getItem("userInfo");
