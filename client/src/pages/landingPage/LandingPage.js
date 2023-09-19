@@ -6,12 +6,12 @@ import "./LandingPage.css";
 const LandingPage = () => {
   let navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const userInfo = localStorage.getItem("userInfo");
-  //   if (userInfo) {
-  //     navigate("/jobs");
-  //   }
-  // }, []);
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+    if (userInfo) {
+      navigate("/jobs");
+    }
+  }, []);
 
   return (
     <div className="landing__main">
