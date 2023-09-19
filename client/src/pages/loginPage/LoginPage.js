@@ -9,10 +9,20 @@ import ErrorMessage from "../../components/ErrorMessage";
 import "./LoginPage.css";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,14 +34,7 @@ const LoginPage = () => {
         },
       };
       setLoading(true);
-      const { data } = await axios.post(
-        "/api/users/login",
-        {
-          email,
-          password,
-        },
-        config
-      );
+      const { data } = await axios.post("/api/users/login", user, config);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
     } catch (error) {
@@ -47,11 +50,12 @@ const LoginPage = () => {
         {loading && <Loading />}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email Address</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter email"
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              onChange={handleChange}
             />
           </Form.Group>
 
@@ -60,7 +64,8 @@ const LoginPage = () => {
             <Form.Control
               type="password"
               placeholder="Enter password"
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              onChange={handleChange}
             />
           </Form.Group>
 
