@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { register, reset } from "../../auth/authSlice";
 import MainScreen from "../../components/mainScreen/MainScreen";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 
@@ -14,9 +17,13 @@ const RegisterPage = () => {
   };
   const [newUser, setNewUser] = useState(defaultUser);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState(null);
-  const [loading, setLoading] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, loading, error, success, message } = useSelector(
+    (state) => state.auth
+  );
 
   const handleChange = (e) => {
     setNewUser({
@@ -25,37 +32,30 @@ const RegisterPage = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (newUser.password !== confirmPassword) {
-      setMessage("Passwords Do Not Match");
+      toast.error("Passwords do not match");
     } else {
-      setMessage(null);
-      try {
-        const config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-        };
-        setLoading(true);
-        const name = newUser.name;
-        const email = newUser.email;
-        const password = newUser.password;
-        const { data } = await axios.post(
-          "/api/users/",
-          { name, email, password },
-          config
-        );
-        localStorage.setItem("userInfo", JSON.stringify(data));
-        setLoading(false);
-      } catch (error) {
-        setError(error.response.data.message);
-        setLoading(false);
-      }
+      const userData = {
+        name: newUser.name,
+        email: newUser.email,
+        password: newUser.password,
+      };
+      dispatch(register(userData));
+      setConfirmPassword("");
     }
-    setNewUser(defaultUser);
-    setConfirmPassword("");
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(message);
+    }
+    if (success || user) {
+      navigate("/jobs");
+    }
+    dispatch(reset());
+  }, [user, error, success, message, navigate, dispatch]);
 
   return (
     <MainScreen title="Register">

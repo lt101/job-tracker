@@ -5,6 +5,8 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import LandingPage from "./pages/landingPage/LandingPage";
 import LoginPage from "./pages/loginPage/LoginPage";
@@ -27,6 +29,7 @@ const App = () => {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 };
