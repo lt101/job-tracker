@@ -7,7 +7,6 @@ import MainScreen from "../../components/mainScreen/MainScreen";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
-import ErrorMessage from "../../components/ErrorMessage";
 
 const RegisterPage = () => {
   const defaultUser = {
