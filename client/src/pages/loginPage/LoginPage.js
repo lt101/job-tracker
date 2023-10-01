@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { login, reset } from "../../auth/authSlice";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import MainScreen from "../../components/mainScreen/MainScreen";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
@@ -9,39 +12,44 @@ import ErrorMessage from "../../components/ErrorMessage";
 import "./LoginPage.css";
 
 const LoginPage = () => {
-  const [user, setUser] = useState({
+  const [userForm, setUser] = useState({
     email: "",
     password: "",
   });
 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, loading, error, success, message } = useSelector(
+    (state) => state.auth
+  );
 
   const handleChange = (e) => {
     setUser({
-      ...user,
+      ...userForm,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      setLoading(true);
-      const { data } = await axios.post("/api/users/login", user, config);
-      localStorage.setItem("userInfo", JSON.stringify(data));
-      setLoading(false);
-    } catch (error) {
-      setError(error.response.data.message);
-      setLoading(false);
-    }
+    const userData = {
+      email: userForm.email,
+      password: userForm.password,
+    };
+    dispatch(login(userData));
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(message);
+    }
+    if (success || user) {
+      navigate("/jobs");
+    }
+    dispatch(reset());
+  }, [user, error, success, message, navigate, dispatch]);
 
   return (
     <MainScreen title="Login">
