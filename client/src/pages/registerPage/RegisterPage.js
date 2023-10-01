@@ -35,7 +35,7 @@ const RegisterPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newUser.password !== confirmPassword) {
-      toast.error("Passwords do not match");
+      toast.error("Passwords do not match", { theme: "dark" });
     } else {
       const userData = {
         name: newUser.name,
@@ -49,7 +49,7 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(message);
+      toast.error(message, { theme: "dark" });
     }
     if (success || user) {
       navigate("/jobs");
@@ -60,8 +60,6 @@ const RegisterPage = () => {
   return (
     <MainScreen title="Register">
       <div className="login_container">
-        {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
-        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         {loading && <Loading />}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="name">

@@ -7,7 +7,6 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MainScreen from "../../components/mainScreen/MainScreen";
 import Loading from "../../components/Loading";
-import ErrorMessage from "../../components/ErrorMessage";
 
 import "./LoginPage.css";
 
@@ -43,7 +42,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error(message);
+      toast.error(message, { theme: "dark" });
     }
     if (success || user) {
       navigate("/jobs");
@@ -54,7 +53,6 @@ const LoginPage = () => {
   return (
     <MainScreen title="Login">
       <div className="login_container">
-        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         {loading && <Loading />}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
