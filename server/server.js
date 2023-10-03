@@ -3,6 +3,7 @@ const jobs = require("./data/jobs");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
+const jobsRoutes = require("./routes/jobsRoutes");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 
 const app = express();
@@ -14,11 +15,12 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-app.get("/api/jobs", (req, res) => {
-  res.json(jobs);
-});
+// app.get("/api/jobs", (req, res) => {
+//   res.json(jobs);
+// });
 
 app.use("/api/users", userRoutes);
+app.use("/api/jobs", jobsRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
