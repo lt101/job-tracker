@@ -41,7 +41,7 @@ const updateJob = asyncHandler(async (req, res) => {
     job.status = status;
 
     const updatedJob = await job.save();
-    res.json({ id: req.params.id, updatedJob });
+    res.json(updatedJob);
   } else {
     res.status(404);
     throw new Error("Job not found");
