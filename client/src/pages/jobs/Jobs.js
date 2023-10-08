@@ -1,33 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Badge, Button, Card } from "react-bootstrap";
-import axios from "axios";
 import "./Jobs.css";
 import MainScreen from "../../components/mainScreen/MainScreen";
+import Loading from "../../components/Loading";
+import { getJobs, deleteJob, reset } from "../../features/jobs/jobSlice";
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState([]);
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure?")) {
-    }
-  };
-
-  const fetchJobs = async () => {
-    const { data } = await axios.get("/api/jobs");
-    setJobs(data);
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+  const { jobs, loading, error, message } = useSelector((state) => state.jobs);
 
   useEffect(() => {
-    fetchJobs();
-  }, []);
+    if (error) {
+      console.log(message);
+    }
+    if (!user) {
+      navigate("/login");
+    }
+    dispatch(getJobs());
+    return () => {
+      dispatch(reset());
+    };
+  }, [user, navigate, error, message, dispatch]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
-    <MainScreen title="Welcome back...">
-      <Link to="createJob">
+    <MainScreen title="Welcome back">
+      <Link to="/createJob">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
           New job application
         </Button>
       </Link>
+      {jobs.length === 0 && (
+        <h3>
+          You are not tracking any job applications yet. Create a new job
+          application to start!
+        </h3>
+      )}
       {jobs.map((job) => (
         <Card style={{ margin: 10 }}>
           <Card.Header style={{ display: "flex" }}>
@@ -48,7 +63,7 @@ const Jobs = () => {
               <Button
                 variant="danger"
                 className="mx-2"
-                onClick={() => handleDelete(job.id)}
+                onClick={() => dispatch(deleteJob(job._id))}
               >
                 Delete
               </Button>

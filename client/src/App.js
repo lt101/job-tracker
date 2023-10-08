@@ -13,6 +13,7 @@ import LoginPage from "./pages/loginPage/LoginPage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
 import Root from "./Root";
 import Jobs from "./pages/jobs/Jobs";
+import JobForm from "./pages/jobs/JobForm";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="jobs" element={<Jobs />} />
+        <Route path="createJob" element={<JobForm />} />
       </Route>
     )
   );

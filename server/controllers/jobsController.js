@@ -56,7 +56,7 @@ const deleteJob = asyncHandler(async (req, res) => {
   }
   if (job) {
     await job.deleteOne();
-    res.json({ message: "Job removed" });
+    res.json({ id: req.params.id });
   } else {
     res.status(404);
     throw new Error("Job not found");
