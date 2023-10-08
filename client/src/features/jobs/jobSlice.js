@@ -117,8 +117,8 @@ export const jobSlice = createSlice({
         state.loading = false;
         state.success = true;
         const { id, updatedJob } = action.payload;
-        state.jobs = state.jobs.map((item) =>
-          item.id === id ? updatedJob : item
+        state.jobs = state.jobs.map((job) =>
+          job._id === id ? updatedJob : job
         );
       })
       .addCase(updateJob.rejected, (state, action) => {
