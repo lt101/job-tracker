@@ -14,6 +14,7 @@ import RegisterPage from "./pages/registerPage/RegisterPage";
 import Root from "./Root";
 import Jobs from "./pages/jobs/Jobs";
 import JobForm from "./pages/jobs/JobForm";
+import UpdateForm from "./pages/jobs/UpdateForm";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="register" element={<RegisterPage />} />
         <Route path="jobs" element={<Jobs />} />
         <Route path="createJob" element={<JobForm />} />
+        <Route path="jobs/:id" element={<UpdateForm />} />
       </Route>
     )
   );

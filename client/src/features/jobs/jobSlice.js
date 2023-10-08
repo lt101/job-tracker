@@ -40,6 +40,24 @@ export const getJobs = createAsyncThunk("jobs/getAll", async (_, thunkAPI) => {
   }
 });
 
+export const updateJob = createAsyncThunk(
+  "jobs/update",
+  async (jobData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await jobService.updateJob(jobData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const deleteJob = createAsyncThunk(
   "jobs/delete",
   async (id, thunkAPI) => {
@@ -88,6 +106,23 @@ export const jobSlice = createSlice({
         state.jobs = action.payload;
       })
       .addCase(getJobs.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        state.message = action.payload;
+      })
+      .addCase(updateJob.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateJob.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.jobs = state.jobs.map((job) => {
+          if (job._id === action.payload.id) {
+            return action.payload.updatedJob;
+          }
+        });
+      })
+      .addCase(updateJob.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
         state.message = action.payload;

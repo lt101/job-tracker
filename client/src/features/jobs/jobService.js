@@ -26,6 +26,25 @@ const getJobs = async (token) => {
   return response.data;
 };
 
+const updateJob = async (jobData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const jobId = jobData.id;
+  const updatedInfo = {
+    company: jobData.company,
+    position: jobData.position,
+    status: jobData.status,
+  };
+
+  const response = await axios.put(API_URL + jobId, updatedInfo, config);
+
+  return response.data;
+};
+
 const deleteJob = async (id, token) => {
   const config = {
     headers: {
@@ -41,6 +60,7 @@ const deleteJob = async (id, token) => {
 const jobService = {
   createJob,
   getJobs,
+  updateJob,
   deleteJob,
 };
 

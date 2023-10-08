@@ -59,7 +59,9 @@ const Jobs = () => {
               {job.company}
             </span>
             <div>
-              <Button href={`/jobs/${job.id}`}>Edit</Button>
+              <Link to={`/jobs/${job._id}`}>
+                <Button>Edit</Button>
+              </Link>
               <Button
                 variant="danger"
                 className="mx-2"
@@ -71,7 +73,7 @@ const Jobs = () => {
           </Card.Header>
           <Card.Body>
             <h4>
-              <Badge bg="secondary">Category - {job.status}</Badge>
+              <Badge bg="secondary">Status - {job.status}</Badge>
             </h4>
             <blockquote className="blockquote mb-0">
               <p>{job.position}</p>
