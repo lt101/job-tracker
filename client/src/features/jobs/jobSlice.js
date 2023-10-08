@@ -116,11 +116,10 @@ export const jobSlice = createSlice({
       .addCase(updateJob.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.jobs = state.jobs.map((job) => {
-          if (job._id === action.payload.id) {
-            return action.payload.updatedJob;
-          }
-        });
+        const { id, updatedJob } = action.payload;
+        state.jobs = state.jobs.map((item) =>
+          item.id === id ? updatedJob : item
+        );
       })
       .addCase(updateJob.rejected, (state, action) => {
         state.loading = false;
