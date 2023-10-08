@@ -43,7 +43,6 @@ const Header = () => {
               <Link to="/jobs">My job applications</Link>
             </Nav.Link>
             <NavDropdown title="Test User" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
