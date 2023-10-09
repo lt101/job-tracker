@@ -25,7 +25,7 @@ const Header = () => {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand>
-          <Link to="/">Search Inn</Link>
+          <Link to="/">NeXtep</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

@@ -20,7 +20,7 @@ const LandingPage = () => {
           <div className="landing__intro">
             <div>
               <h1 className="landing__title" style={{ color: "white" }}>
-                Welcome to Search Inn
+                Welcome to NeXtep
               </h1>
               <p className="landing__subtitle" style={{ color: "white" }}>
                 Your centralized job search tracker.
