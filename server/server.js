@@ -15,10 +15,6 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-// app.get("/api/jobs", (req, res) => {
-//   res.json(jobs);
-// });
-
 app.use("/api/users", userRoutes);
 app.use("/api/jobs", jobsRoutes);
 
