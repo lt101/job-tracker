@@ -1,6 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
+const cors = require("cors");
+const corsOptions = require("./config/corsOptions");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const jobsRoutes = require("./routes/jobsRoutes");
@@ -8,6 +10,8 @@ const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 
 const app = express();
 dotenv.config();
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
