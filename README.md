@@ -1,6 +1,6 @@
 # NeXtep - Job Application Tracker
 
-Live demo: [Link text]https://next-ep-h8c3.onrender.com
+Live demo: https://next-ep-h8c3.onrender.com
 
 ## About
 NeXtep is a lightweight app which allows users to manage their job applications by creating and updating them with just a few clicks.
