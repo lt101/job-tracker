@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/api/jobs/";
+const API_URL = "https://nextep-api.cyclic.app/api/jobs/";
 
 const createJob = async (jobData, token) => {
   const config = {
