@@ -8,7 +8,7 @@ const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 
 const app = express();
 dotenv.config();
-connectDB();
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -30,4 +30,6 @@ if (process.env.NODE_ENV === "production") {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, console.log(`Server started on PORT ${PORT}`));
+connectDB().then(() => {
+  app.listen(PORT, console.log(`Server started on PORT ${PORT}`));
+});
